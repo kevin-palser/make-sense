@@ -1,5 +1,6 @@
 import {IPoint} from '../interfaces/IPoint';
 import {ILine} from '../interfaces/ILine';
+import {Settings} from '../settings/Settings';
 
 export class PolygonUtil {
     public static getEdges(vertices: IPoint[], closed: boolean = true): ILine[] {
@@ -9,5 +10,13 @@ export class PolygonUtil {
             lines.push({start: points[i], end: points[i + 1]})
         }
         return lines;
+    }
+
+    public static canRemoveVertex(vertices: IPoint[]): boolean {
+        return vertices.length > Settings.POLYGON_MIN_VERTICES_COUNT;
+    }
+
+    public static removeVertex(vertices: IPoint[], index: number): IPoint[] {
+        return vertices.filter((vertex: IPoint, vertexIndex: number) => vertexIndex !== index);
     }
 }

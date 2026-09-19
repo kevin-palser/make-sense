@@ -32,6 +32,8 @@ export class Settings {
     public static readonly RESIZE_HANDLE_DIMENSION_PX: number = 8;
     public static readonly RESIZE_HANDLE_HOVER_DIMENSION_PX = 16;
 
+    public static readonly POLYGON_MIN_VERTICES_COUNT: number = 3;
+
     public static readonly CLOSEABLE_POPUPS: PopupWindowType[] = [
         PopupWindowType.IMPORT_IMAGES,
         PopupWindowType.EXPORT_ANNOTATIONS,

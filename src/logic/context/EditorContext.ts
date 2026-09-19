@@ -95,6 +95,15 @@ export class EditorContext extends BaseContext {
         {
             keyCombo: PlatformUtil.isMac(window.navigator.userAgent) ? ["Backspace"] : ["Delete"],
             action: (event: KeyboardEvent) => {
+                if (EditorModel.supportRenderingEngine && EditorModel.supportRenderingEngine.labelType === LabelType.POLYGON) {
+                    const editorData: EditorData = EditorActions.getEditorData();
+                    const polygonRenderEngine = EditorModel.supportRenderingEngine as PolygonRenderEngine;
+                    if (polygonRenderEngine.hasHighlightedAnchor(editorData)) {
+                        polygonRenderEngine.deleteHighlightedAnchor(editorData);
+                        EditorActions.fullRender();
+                        return;
+                    }
+                }
                 LabelActions.deleteActiveLabel();
             }
         },
